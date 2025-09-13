@@ -1,5 +1,4 @@
 import numpy as np
-import statistics
 
 # Importante: verifica que tu nombre y número de matrícula esten correctos
 
@@ -11,12 +10,13 @@ def capitalizacion():
     datos = [17, 21, 44, 50, 79, 86, 140, 178, 203]
     media = np.mean(datos)
     mediana = np.median(datos)
-    try:
-        moda = statistics.mode(datos)   
-    except statistics.StatisticsError:
-        moda = datos[0]  
+    desv_est = np.std(datos, ddof=1)
     desv_est = np.std(datos)
-    return (media, mediana, moda, desv_est)
+    
+    return (media, mediana, desv_est)
+
+resultado = capitalizacion()
+print(resultado)
   
 def asistencia_dispersion():
     """
@@ -42,10 +42,10 @@ def histograma_np():
     calificaciones = [
         7.9, 7.8, 7.8, 6.7, 7.6, 8.7, 8.5, 7.3, 6.6, 9.9,
         6.6, 5.7, 9.4, 8.4, 7.2, 6.3, 5.1, 4.8, 5.0, 6.1,
-        7.0, 9.3, 10.0, 8.9
-    ]
-    counts, bins = np.histogram(calificaciones, bins=np.arange(0, 11, 1))
-    return counts, bins
+        7.0, 9.3, 10.0, 8.9]
+    
+    histograma = np.histogram(np.array(calificaciones, dtype=float))
+    return histograma
 
 
 def correlacion():
